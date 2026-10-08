@@ -1,0 +1,58 @@
+﻿@model List<Event>
+
+@{
+    ViewData["Title"] = "Події";
+}
+
+<h1>Мої події</h1>
+
+<a asp-action="Create" class="btn btn-primary">
+    Створити подію
+</a>
+
+<br />
+<br />
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Назва</th>
+            <th>Опис</th>
+            <th>Дата та час</th>
+            <th>Email</th>
+            <th>Нагадування</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Title</td>
+
+                <td>@item.Description</td>
+
+                <td>
+                    @item.EventDate.ToString("dd.MM.yyyy HH:mm")
+                </td>
+
+                <td>@item.UserEmail</td>
+
+                <td>
+                    @if (item.NotificationSent)
+                    {
+                        <span class="text-success">
+                            Відправлено
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="text-warning">
+                            Очікується
+                        </span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
